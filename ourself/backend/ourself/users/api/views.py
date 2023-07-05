@@ -18,36 +18,24 @@ class UserViewSet(viewsets.ViewSet):
         serializer=UserSerializer(user)
         return Response(serializer.data)
     
+    def create(self, request):
+        queryset=request.data
+        serializer=UserSerializer(data=queryset)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
+    
+    def update(self, request, pk):
+        queryset=request.data
+        user=User.objects.get(id=pk)
+        serializer=UserSerializer(instance=user, data=queryset)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
 
-
-
-
-
-
-# from rest_framework.response import Response
-# from rest_framework.decorators import APIView
-
-# from django.contrib.auth.models import User
-# from users.api.serializers import UserSerializer
-
-# @api_view(['GET'])
-# def getUsers(request):
-#     user=User.objects.all()
-#     serializer=UserSerializer(user, many=True)
-#     return Response(serializer.data)
-
-
-# from django.contrib.auth.models import User
-# from rest_framework import viewsets, permissions
-# from users.api.serializers import UserSerializer
-
-# class UsersViewSet(viewsets.ModelViewSet):
-#     queryset=User.objects.all().order_by('-date_joined')
-#     serializer_class=UserSerializer
-#     permission_classes=[permissions.IsAuthenticated]
-
-# class UserViewSet(viewsets.ModelViewSet):
-#     def UserGet(pk):
-#         queryset=User.objects.get(id=pk)
-#         serializer_class=UserSerializer
-#         permissions_classes=[permissions.IsAuthenticated]
+    def destroy(self, request, pk=None):
+        user = User.objects.get(id=pk)
+        user.delete()
+        return Response('User deleted')
