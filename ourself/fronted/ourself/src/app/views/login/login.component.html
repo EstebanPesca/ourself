@@ -11,11 +11,12 @@
             <div class="card-3d-wrap mx-auto">
               <div class="card-3d-wrapper">
 
+                <!-- Login's Form -->
                 <div class="card-front">
                   <div class="center-wrap">
                     <div class="section text-center">
                       <h4 class="mb-4 pb-3">Log In</h4>
-                      <form>
+                      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
                         <div class="form-group">
                           <input type="email" class="form-style" placeholder="Email" formControlName="user">
                           <i class="input-icon uil uil-at"></i>
@@ -25,12 +26,13 @@
                           <i class="input-icon uil uil-lock-alt"></i>
                         </div>
                         <button type="submit" class="btn mt-4">Login</button>
-                        <!-- <a href="" class="btn mt-4">Login</a> -->
                         <p class="mb-0 mt-4 text-center"><a href="#" class="link">Forgot your password?</a></p>
                       </form>
                     </div>
                   </div>
                 </div>
+
+                <!-- Register's form -->
 
                 <div class="card-back">
                   <div class="center-wrap">

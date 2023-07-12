@@ -14,3 +14,6 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+// Exporting the components
+export const routingComponents = [LoginComponent, HomeComponent]
