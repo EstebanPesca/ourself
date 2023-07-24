@@ -11,21 +11,21 @@ import { LoginI } from '../../models/login/login.interface';
 })
 export class LoginComponent {
 
-  loginForm = new FormGroup({
-    user: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required)
-  })
+  loginForm; FormGroup:any;
 
-  constructor(private userService:UserService){}
+  constructor(private userService:UserService){
+    this.loginForm = new FormGroup({
+      username: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required)
+    })
+  }
 
   onLogin(){
-    // let users:LoginI = {
-    //   user: this.loginForm.get('user')?.value,
-    //   password: this.loginForm.get('password')?.value
-    // }
-
-    const form:any = this.loginForm.value
-    this.userService.loginByEmail(form).subscribe(data => {
+    const formData:LoginI = {
+      username: this.loginForm.get('username')?.value || '',
+      password: this.loginForm.get('password')?.value || '',
+    };
+    this.userService.loginByEmail(formData).subscribe(data => {
       console.log(data);
     });
   }

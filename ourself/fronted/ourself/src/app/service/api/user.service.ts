@@ -14,9 +14,7 @@ export class UserService {
   constructor( private http:HttpClient) { }
 
   loginByEmail(form:LoginI):Observable<ResponseI>{
-
-    let path = this.urlApi + "users/users";
-
+    let path = this.urlApi + "users/users/";
     return this.http.post<ResponseI>(path, form);
   }
 
