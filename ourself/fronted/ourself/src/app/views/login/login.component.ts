@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 import { UserService } from '../../service/api/user.service';
 import { LoginI } from '../../models/login/login.interface';
+import { Router } from '@angular/router';
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -11,23 +13,29 @@ import { LoginI } from '../../models/login/login.interface';
 })
 export class LoginComponent {
 
-  loginForm = new FormGroup({
-    user: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required)
-  })
+  errorMessage: string = "";
+  loginForm; FormGroup:any;
 
-  constructor(private userService:UserService){}
+  constructor(private userService:UserService, private router: Router){
+    this.loginForm = new FormGroup({
+      username: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required)
+    })
+  }
 
   onLogin(){
-    // let users:LoginI = {
-    //   user: this.loginForm.get('user')?.value,
-    //   password: this.loginForm.get('password')?.value
-    // }
-
-    const form:any = this.loginForm.value
-    this.userService.loginByEmail(form).subscribe(data => {
-      console.log(data);
-    });
+    const formData:LoginI = {
+      username: this.loginForm.get('username')?.value || '',
+      password: this.loginForm.get('password')?.value || '',
+    };
+    this.userService.login(formData).subscribe(
+      Response => {
+        this.router.navigate(['/home']);
+      },
+      error =>{
+        this.errorMessage = error;
+      }
+    );
   }
 
 }
