@@ -127,14 +127,13 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-<<<<<<< HEAD
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:4200',  # Add Angular's origen
 ]
-=======
+
+
 # Configurating the token access with the 'djangorestframework-simplejwt' package
 
 REST_FRAMEWORK = {
@@ -146,4 +145,3 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
->>>>>>> backend

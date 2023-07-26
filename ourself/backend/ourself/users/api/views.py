@@ -5,6 +5,9 @@ from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
 
 class UserLoginView(APIView):
+
+    authentication_classes = []
+
     def post(self, request):
         username = request.data.get('username')
         password = request.data.get('password')

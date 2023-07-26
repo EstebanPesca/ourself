@@ -11,6 +11,8 @@ import { LoginI } from '../../models/login/login.interface';
 })
 export class LoginComponent {
 
+  protectedData : any;
+  errorMessage: string = "";
   loginForm; FormGroup:any;
 
   constructor(private userService:UserService){
@@ -25,9 +27,7 @@ export class LoginComponent {
       username: this.loginForm.get('username')?.value || '',
       password: this.loginForm.get('password')?.value || '',
     };
-    this.userService.loginByEmail(formData).subscribe(data => {
-      console.log(data);
-    });
+    this.userService.login(formData);
   }
 
 }
