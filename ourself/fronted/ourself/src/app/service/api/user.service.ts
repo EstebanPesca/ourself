@@ -10,7 +10,6 @@ import { Observable, catchError, throwError } from 'rxjs';
 export class UserService {
 
   private urlApi:string = "http://127.0.0.1:8000/auth/";
-  private accessToken: string = '';
 
   constructor( private http:HttpClient) { }
 
@@ -23,10 +22,6 @@ export class UserService {
           return throwError('An unexpected error ocurred.');
         }
       })
-    ).subscribe(
-      Response => {
-        this.accessToken = Response.accessToken;
-      }
     )
   }
 
