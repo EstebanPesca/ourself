@@ -1,0 +1,26 @@
+.barside-body{
+  width: 280px;
+  height: 100vh;
+  background-color: #5f4b66;
+}
+
+/* ul li a{
+  color: #d3b88c;
+} */
+
+.dropdown-user{
+  color: #F4F2F3;
+}
+
+.settings-users{
+  color: #1d1a05;
+}
+
+.perro{
+  color: #F4F2F3;
+}
+
+.nav-link.active{
+  background-color: #F4F2F3;
+  color: #1d1a05;
+}

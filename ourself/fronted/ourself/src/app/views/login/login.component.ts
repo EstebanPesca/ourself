@@ -4,7 +4,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../../service/api/user.service';
 import { LoginI } from '../../models/login/login.interface';
 import { Router } from '@angular/router';
-import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +12,6 @@ import { catchError } from 'rxjs';
 })
 export class LoginComponent {
 
-  errorMessage: string = "";
   loginForm; FormGroup:any;
 
   constructor(private userService:UserService, private router: Router){
@@ -28,14 +26,12 @@ export class LoginComponent {
       username: this.loginForm.get('username')?.value || '',
       password: this.loginForm.get('password')?.value || '',
     };
-    this.userService.login(formData).subscribe(
-      Response => {
-        this.router.navigate(['/home']);
-      },
-      error =>{
-        this.errorMessage = error;
-      }
-    );
+    this.userService.login(formData).subscribe(async (response) => {
+      await this.userService.setAccessToken(response['access_token']);
+      this.router.navigate(['/home']);
+    },(error) => {
+      console.log(error);
+    } );
   }
 
 }

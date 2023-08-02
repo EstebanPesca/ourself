@@ -2,11 +2,22 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './views/login/login.component';
 import { HomeComponent } from './views/home/home.component';
+import { SidebarComponent } from './templates/sidebar/sidebar.component';
+import { loginGuard } from './guards/login/login.guard';
+import { LayoutComponent } from './templates/layout/layout.component';
 
 const routes: Routes = [
-  {path:'' , redirectTo:'login', pathMatch:'full'},
+  {
+    path: '',
+    component: LayoutComponent,
+    canActivate: [loginGuard],
+    children: [
+      {path:'', redirectTo: 'home', pathMatch:'full'},
+      {path: 'home', component: HomeComponent},
+    ]
+  },
   {path:'login', component:LoginComponent},
-  {path:'home', component:HomeComponent}
+  {path:'**' , redirectTo:'login', pathMatch:'full'},
 ];
 
 @NgModule({
@@ -16,4 +27,4 @@ const routes: Routes = [
 export class AppRoutingModule { }
 
 // Exporting the components
-export const routingComponents = [LoginComponent, HomeComponent]
+export const routingComponents = [LoginComponent, HomeComponent, SidebarComponent, LayoutComponent,SidebarComponent]

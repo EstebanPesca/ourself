@@ -8,6 +8,9 @@ import { FooterComponent } from './templates/footer/footer.component';
 
 // import { LoginComponent } from './views/login/login.component';
 // import { HomeComponent } from './views/home/home.component';
+// import { SiderbarComponent } from './templates/siderbar/siderbar.component';
+// import { LayoutComponent } from './templates/layout/layout.component';
+// import { SidebarComponent } from './templates/sidebar/sidebar.component';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -18,7 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     FooterComponent,
     // Calling the components
-    routingComponents
+    routingComponents,
   ],
   imports: [
     BrowserModule,
